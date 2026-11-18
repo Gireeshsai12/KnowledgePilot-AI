@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KnowledgePilot AI</title>
+<link rel="stylesheet" href="/static/style.css">
+<script src="/static/app.js" defer></script>
+</head>
+<body>
+<header><a href="/">KnowledgePilot <span>AI</span></a><button id="logout" hidden>Sign out</button></header>
+<main>
+<section class="intro"><p>DOCUMENT INTELLIGENCE</p><h1>Find answers in your documents.</h1><p>Search your workspace and inspect the source behind every cited excerpt.</p></section>
+<p id="status" role="status" aria-live="polite"></p>
+<section class="card auth" id="auth">
+<h2>Access your workspace</h2>
+<form id="auth-form">
+<label>Email<input name="email" type="email" autocomplete="email" required></label>
+<label>Password<input name="password" type="password" minlength="10" autocomplete="current-password" required></label>
+<div class="row"><button value="login">Sign in</button><button class="secondary" value="register">Create account</button></div>
+</form>
+</section>
+<div id="dashboard" hidden>
+<div class="toolbar"><label>Workspace<select id="workspace"></select></label><form id="new-workspace" class="row"><label>New workspace<input name="name" required maxlength="80"></label><button class="secondary">Create</button></form></div>
+<div class="grid">
+<aside class="card">
+<h2>Documents</h2>
+<form id="upload">
+<label>File<input name="file" type="file" accept=".pdf,.docx,.txt,.md,.csv,.html" required></label>
+<label>Chunking<select name="strategy"><option value="heading">Heading-aware</option><option value="recursive">Sentence-aware</option><option value="fixed">Fixed size</option></select></label>
+<div class="row"><button>Index file</button><button id="demo" type="button" class="secondary">Load samples</button></div>
+</form>
+<ul id="documents"></ul>
+<details id="sharing"><summary>Manage access</summary><form id="share"><label>Registered email<input type="email" name="email" required></label><label>Role<select name="role"><option>viewer</option><option>editor</option></select></label><button>Save access</button></form></details>
+</aside>
+<section class="card">
+<h2>Ask or search</h2>
+<form id="research">
+<label>Question or keywords<input name="question" required minlength="2" maxlength="500" placeholder="How many vacation days do employees receive?"></label>
+<div class="filters"><label>Document<select id="filter" name="document_id"></select></label>
+<label>Search method<select name="mode"><option value="hybrid">Hybrid</option><option value="keyword">Keyword</option><option value="vector">TF-IDF cosine</option></select></label></div>
+<div class="row"><button value="chat">Ask a question</button><button value="search" class="secondary">Search</button></div>
+</form>
+<details><summary>Compare documents</summary><form id="compare"><div class="filters"><label>First document<select name="first" id="first" required></select></label><label>Second document<select name="second" id="second" required></select></label></div><label>Topic<input name="topic" required minlength="2" maxlength="300" placeholder="Onboarding checklist"></label><button>Compare</button></form></details>
+<div id="results" aria-live="polite"></div>
+<details><summary>Recent questions</summary><button id="history" class="secondary">Load history</button><div id="history-list"></div></details>
+</section>
+</div>
+</div>
+</main>
+<dialog id="preview"><h2 id="preview-title"></h2><p id="preview-text"></p><form method="dialog"><button>Close source</button></form></dialog>
+</body>
+</html>
